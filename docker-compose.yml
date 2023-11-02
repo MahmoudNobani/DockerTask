@@ -7,19 +7,23 @@ services:
     ports:
       - "8899:80"
     networks:
-      myN:
-        ipv4_address: 172.18.0.2 
+      dockerN:
+        ipv4_address: 172.20.0.2 
 
   client-server:
-    container_name: client-server
     image: client-server
+    container_name: client-server
     depends_on:
       - apache-server
     networks:
-      myN:
-        ipv4_address: 172.18.0.3 
+      dockerN:
+        ipv4_address: 172.20.0.3 
 
 networks:
-  myN:
-    external: true
+  dockerN:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+
 
