@@ -1,8 +1,11 @@
 FROM centos:7
 
-RUN yum-config-manager --add-repo http://172.17.0.2/custom.repo
 
 RUN yum -y install yum-priorities
+
+RUN yum-config-manager --add-repo http://172.17.0.2/custom.repo
+COPY --from=apache-server /HTTPDrepo  /HTTPDrepo 
+COPY val.sh /etc
 
 RUN yum -y clean all
 
