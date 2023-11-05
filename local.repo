@@ -1,6 +1,6 @@
-[SECserver]
-name=httpd
-baseurl=file:///server_repo/packages
+[MAINserver]
+name=MAINserver
+baseurl=http://172.17.0.1:8899/packages/
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
