@@ -1,7 +1,7 @@
 pipeline {
-	  agent { 
+	agent { 
         node {
-            label 'docker-agent-alpine'
+            label 'docker_node'
             }
       }
     stages {
