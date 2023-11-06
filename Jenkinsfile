@@ -5,7 +5,7 @@ pipeline {
 	    agent any
             steps {
                 echo "Building.."
-                sh sh '''
+                sh '''
                 cd client
                 ./t.sh
 		./server.sh
