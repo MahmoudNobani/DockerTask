@@ -2,7 +2,11 @@ pipeline {
     agent none
     stages {
         stage('Build') {
-	    agent apache_server_agent
+	    agent         
+		node {
+            	   label 'apache_server_agent'
+            	}
+
             steps {
                 echo "Building.."
                 sh '''
