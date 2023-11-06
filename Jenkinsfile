@@ -8,6 +8,8 @@ pipeline {
                 sh '''
                 cd client
                 ./t.sh
+		cd ..
+		ls -ltr
 		./server.sh
                 '''
             }
