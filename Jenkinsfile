@@ -9,7 +9,6 @@ pipeline {
         stage('Build') {
             steps {
 		script {
-			echo "DOCKER_CERT_PATH = ${DOCKER_CERT_PATH}"
 			echo "DOCKER_HOST = ${DOCKER_HOST}"
 			echo "DOCKER_TLS_VERIFY = ${DOCKER_TLS_VERIFY}"
 			echo "Building.."
