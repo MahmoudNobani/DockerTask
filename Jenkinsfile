@@ -1,5 +1,9 @@
 pipeline {
 	agent any
+
+	environment {
+        	DOCKER_TLS_VERIFY = 0
+    	}
       
     stages {
         stage('Build') {
