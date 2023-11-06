@@ -3,7 +3,7 @@ pipeline {
         node {
             label 'docker_node'
       }
-      
+      }
     stages {
         stage('Build') {
             steps {
