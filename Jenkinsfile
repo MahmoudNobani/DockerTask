@@ -1,25 +1,23 @@
 pipeline {
 	agent any
-        tools {
-            Docker 'docker'
-            }
       
     stages {
         stage('Build') {
             steps {
-				script {
-					echo "Building.."
-					sh '''
-					cd client
-					./t.sh
-					cd ..
-					ls -ltr
-
-					docker build  -t apache-server .
-					echo "docker built"
-					docker run -d --name apache-server -p 8899:80 apache-server
-						'''
-				}
+			script {
+				echo "Building.."
+				sh '''
+				cd client
+				./t.sh
+				cd ..
+				ls -ltr
+					'''
+					// This step should not normally be used in your script. Consult the inline help for details.
+			withDockerRegistry(credentialsId: 'mahmoudnobani', url: 'https://hub.docker.com/r/mahmoudnobani/apache_server/tags') {
+			    sh "docker build -t mahmoudnobani/apache_server:latest"
+			    sh "docker push"
+			}
+			}
             }
         }
         stage('Test') {
