@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
 	    agent         
-		node {
-            	   label 'apache_server_agent'
+		docker {
+            	   image 'apache_server_agent'
             	}
 
             steps {
