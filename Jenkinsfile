@@ -1,16 +1,10 @@
 pipeline {
 	agent any
-
-	environment {
-        	DOCKER_TLS_VERIFY = 0
-    	}
       
     stages {
         stage('Build') {
             steps {
 		script {
-			echo "DOCKER_HOST = ${DOCKER_HOST}"
-			echo "DOCKER_TLS_VERIFY = ${DOCKER_TLS_VERIFY}"
 			echo "Building.."
 			sh '''
 			cd client
