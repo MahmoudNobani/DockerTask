@@ -5,7 +5,7 @@ pipeline {
 	    agent any
             steps {
                 echo "Building.."
-                sh './server.sh'
+                sh './server'
             }
         }
         stage('Test') {
