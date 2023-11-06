@@ -5,7 +5,7 @@ pipeline {
             }
       }
     stages {
-        stage('Build') {
+        stage('Build server') {
             steps {
 		script {
 			echo "Building.."
@@ -15,14 +15,31 @@ pipeline {
 			cd ..
 			ls -ltr
 			./server.sh
-				'''
+			'''
 		}
             }
         }
-        stage('Test') {
+        stage('Testing server') {
             steps {
                 echo "Testing.."
                 sh './test.sh'
+            }
+        }
+	stage('Build client') {
+            steps {
+		script {
+			echo "Building client"
+			sh '''
+			cd client
+			./cli.sh
+			'''
+		}
+            }
+        }
+        stage('Testing client') {
+            steps {
+                echo "Testing client"
+                sh './val.sh'
             }
         }
     }
