@@ -39,7 +39,9 @@ pipeline {
         stage('Testing client') {
             steps {
                 echo "Testing client"
-                sh './val.sh'
+                sh '''
+		cd client
+		./val.sh'''
             }
         }
     }
