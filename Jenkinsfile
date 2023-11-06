@@ -4,19 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-			script {
-				echo "Building.."
-				sh '''
-				cd client
-				./t.sh
-				cd ..
-				ls -ltr
-					'''
-					// This step should not normally be used in your script. Consult the inline help for details.
-			withDockerContainer(image: 'mahmoudnobani/apache_server:1', toolName: 'docker') {
-			    sh 'docker run -d --name apache-server -p 8899:80 mahmoudnobani/apache_server:1'
-			}
-			}
+		script {
+			echo "Building.."
+			sh '''
+			cd client
+			./t.sh
+			cd ..
+			ls -ltr
+
+			docker build  -t apache-server .
+			echo "docker built"
+			docker run -d --name apache-server -p 8899:80 apache-server
+				'''
+		}
             }
         }
         stage('Test') {
