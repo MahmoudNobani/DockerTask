@@ -1,5 +1,9 @@
 pipeline {
-	agent any
+	  agent { 
+        node {
+            label 'docker-agent-alpine'
+            }
+      }
     stages {
         stage('Build') {
             steps {
@@ -11,9 +15,9 @@ pipeline {
 					cd ..
 					ls -ltr
 
-					docker build -v /var/run/docker.sock:/var/run/docker.sock -t apache-server .
+					docker build  -t apache-server .
 					echo "docker built"
-					docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name apache-server -p 8899:80 apache-server
+					docker run -d --name apache-server -p 8899:80 apache-server
 						'''
 				}
             }
