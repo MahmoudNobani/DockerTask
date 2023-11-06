@@ -10,10 +10,10 @@ pipeline {
 					./t.sh
 					cd ..
 					ls -ltr
-					docker -D info
-					docker build -t apache-server .
+
+					docker build -v /var/run/docker.sock:/var/run/docker.sock -t apache-server .
 					echo "docker built"
-					docker run -d --name apache-server -p 8899:80 apache-server
+					docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name apache-server -p 8899:80 apache-server
 						'''
 				}
             }
