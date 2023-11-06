@@ -10,6 +10,7 @@ pipeline {
                 ./t.sh
 		cd ..
 		ls -ltr
+		docker info
 		docker build -t apache-server .
 		echo "docker built"
 		docker run -d --name apache-server -p 8899:80 apache-server
