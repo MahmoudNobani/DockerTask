@@ -6,17 +6,16 @@ pipeline {
          }
     environment {
          DOCKERHUB_CREDENTIALS = credentials('mahmoudnobani')
-      }
+        }
+    triggers {
+         pollSCM '*/2 * * * *'
+        }
     stages {
         stage('Build server') {
             steps {
 		script {
 			echo "Building.."
 			sh '''
-			cd client
-			./t.sh
-			cd ..
-			ls -ltr
 			./server.sh
 			'''
 		}
@@ -49,7 +48,7 @@ pipeline {
         }
         stage('Push server image') {
 	    steps {
-                    sh '''echo $BUILD_NUMBER
+                    sh '''
 		    docker tag apache-server mahmoudnobani/apache_server:$BUILD_NUMBER
 		    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
 		    docker push mahmoudnobani/apache_server:$BUILD_NUMBER
@@ -58,7 +57,7 @@ pipeline {
         }
         stage('Push client image') {
 	    steps {
-                    sh '''echo $BUILD_NUMBER
+                    sh '''
 		    docker tag client-server mahmoudnobani/client_server:$BUILD_NUMBER
 		    docker push mahmoudnobani/client_server:$BUILD_NUMBER
 		    '''

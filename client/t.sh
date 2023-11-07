@@ -1,1 +1,0 @@
-echo "WAIT WHAT, T1 FIGHTING"
