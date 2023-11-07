@@ -50,7 +50,7 @@ pipeline {
 	    steps {
                     sh '''
 		    docker tag apache-server mahmoudnobani/apache_server:$BUILD_NUMBER
-		    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+		    docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW 
 		    docker push mahmoudnobani/apache_server:$BUILD_NUMBER
 		    '''
              }
