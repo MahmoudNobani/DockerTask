@@ -2,11 +2,12 @@ pipeline {
     agent { 
         node {
             label 'docker_node'
-
             }
          }
     environment {
          DOCKERHUB_CREDENTIALS = credentials('mahmoudnobani')
+	 NEXUS_CREDS = credentials('nexus_creds')
+         NEXUS_DOCKER_REPO = 'localhost:8082'
         }
     stages {
         stage('Build server') {
@@ -60,6 +61,16 @@ pipeline {
 		    docker push mahmoudnobani/client_server:$BUILD_NUMBER
 		    '''
              }
+        } 
+	stage('Push server image to nexus') {
+	    steps {
+                    sh '''
+		    docker tag apache-server $NEXUS_DOCKER_REPO/apache-server:$BUILD_NUMBER
+		    docker login -u $NEXUS_CREDS_USR -p $NEXUS_CREDS_PSW $NEXUS_DOCKER_REPO
+		    docker push $NEXUS_DOCKER_REPO/apache-server:$BUILD_NUMBER
+		    '''
+             }
         }
+
     }
 }
