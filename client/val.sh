@@ -4,7 +4,7 @@ container_name="client-server"
 
 sudo docker exec "$container_name" /bin/bash -c '
 if yum info httpd &>/dev/null; then
-    if yum info httpd | grep -qi "From repo   : MAINerver"; then
+    if yum info httpd | grep -qi "From repo   : MAINserver"; then
         echo "true"
         exit 0
     else

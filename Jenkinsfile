@@ -7,9 +7,6 @@ pipeline {
     environment {
          DOCKERHUB_CREDENTIALS = credentials('mahmoudnobani')
         }
-    triggers {
-         pollSCM '*/2 * * * *'
-        }
     stages {
         stage('Build server') {
             steps {
