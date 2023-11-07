@@ -1,8 +1,11 @@
 pipeline {
-	agent { 
+    agent { 
         node {
             label 'docker_node'
             }
+      }
+    environment {
+         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
       }
     stages {
         stage('Build server') {
@@ -43,6 +46,15 @@ pipeline {
 		cd client
 		./val.sh'''
             }
+        }
+        stage('Docker Push') {
+	    steps {
+	       withCredentials([usernamePassword(credentialsId: 'mahmoudnobani', passwordVariable: 'mahmoudnobaniPassword', usernameVariable: 'mahmoudnobaniUser')]) {	
+                   sh '''echo ${env.dockerHubUser} 
+		   echo "   "
+		   echo ${env.dockerHubPassword}'''
+
+	    }
         }
     }
 }
