@@ -50,9 +50,9 @@ pipeline {
         stage('Docker Push') {
 	    steps {
 	       withCredentials([usernamePassword(credentialsId: 'mahmoudnobani', passwordVariable: 'mahmoudnobaniPassword', usernameVariable: 'mahmoudnobaniUser')]) {	
-                   sh '''echo ${env.mahmoudnobaniUser} 
+                   sh '''echo ${DOCKERHUB_CREDENTIALS_USR} 
 		   echo "   "
-		   echo ${env.mahmoudnobaniPassword}'''
+		   echo ${DOCKERHUB_CREDENTIALS_USR}'''
 
 	           }
              }
