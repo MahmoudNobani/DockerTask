@@ -47,15 +47,21 @@ pipeline {
 		./val.sh'''
             }
         }
-        stage('Docker Push') {
+        stage('Push server image') {
 	    steps {
-                        sh '''echo $BUILD_NUMBER
-			docker tag apache-server mahmoudnobani/apache_server:latest
-			echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-			docker push mahmoudnobani/apache_server:latest
-			'''
-
-
+                    sh '''echo $BUILD_NUMBER
+		    docker tag apache-server mahmoudnobani/apache_server:$BUILD_NUMBER
+		    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+		    docker push mahmoudnobani/apache_server:$BUILD_NUMBER
+		    '''
+             }
+        }
+        stage('Push client image') {
+	    steps {
+                    sh '''echo $BUILD_NUMBER
+		    docker tag client-server mahmoudnobani/client_server:$BUILD_NUMBER
+		    docker push mahmoudnobani/client_server:$BUILD_NUMBER
+		    '''
              }
         }
     }
