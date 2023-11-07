@@ -52,7 +52,7 @@ pipeline {
 	       withCredentials([usernamePassword(credentialsId: 'mahmoudnobani', passwordVariable: 'mahmoudnobaniPassword', usernameVariable: 'mahmoudnobaniUser')]) {	
                    sh '''echo ${DOCKERHUB_CREDENTIALS_USR} 
 		   echo "   "
-		   echo ${DOCKERHUB_CREDENTIALS_USR}'''
+		   echo ${DOCKERHUB_CREDENTIALS_PSW}'''
 
 	           }
              }
