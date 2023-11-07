@@ -49,12 +49,14 @@ pipeline {
         }
         stage('Docker Push') {
 	    steps {
-	       withCredentials([usernamePassword(credentialsId: 'mahmoudnobani', passwordVariable: 'mahmoudnobaniPassword', usernameVariable: 'mahmoudnobaniUser')]) {	
-                   sh '''echo ${DOCKERHUB_CREDENTIALS_USR} 
-		   echo "   "
-		   echo ${DOCKERHUB_CREDENTIALS_PSW}'''
+                   sh '''
+                        sh '''echo $BUILD_NUMBER
+			docker tag apache-server mahmoudnobani/apache_server:latest
+			echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+			docker push mahmoudnobani/apache_server:latest
+			'''
 
-	           }
+
              }
         }
     }
