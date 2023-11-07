@@ -3,7 +3,7 @@ pipeline {
         node {
             label 'docker_node'
             }
-      }
+         }
     environment {
          DOCKERHUB_CREDENTIALS = credentials('dockerhub')
       }
@@ -54,7 +54,8 @@ pipeline {
 		   echo "   "
 		   echo ${env.dockerHubPassword}'''
 
-	    }
+	           }
+             }
         }
     }
 }
