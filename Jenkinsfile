@@ -49,7 +49,6 @@ pipeline {
         }
         stage('Docker Push') {
 	    steps {
-                   sh '''
                         sh '''echo $BUILD_NUMBER
 			docker tag apache-server mahmoudnobani/apache_server:latest
 			echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
