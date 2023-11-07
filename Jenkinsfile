@@ -71,6 +71,14 @@ pipeline {
 		    '''
              }
         }
+	stage('Push client image to nexus') {
+	    steps {
+                    sh '''
+		    docker tag client-server $NEXUS_DOCKER_REPO/client-server:$BUILD_NUMBER
+		    docker push $NEXUS_DOCKER_REPO/client-server:$BUILD_NUMBER
+		    '''
+             }
+        }
 
     }
 }
