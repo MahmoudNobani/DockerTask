@@ -45,6 +45,7 @@ pipeline {
 		./val.sh'''
             }
         }
+
         stage('Push server image') {
 	    steps {
                     sh '''
